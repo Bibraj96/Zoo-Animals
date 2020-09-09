@@ -60,3 +60,24 @@ FOREIGN KEY ("zoo_id")
   [1m[36mActiveRecord::InternalMetadata Load (0.2ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? LIMIT ?[0m  [["key", "environment"], ["LIMIT", 1]]
   [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
   [1m[35m (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (2.7ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[35m (0.9ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mZoo Create (2.1ms)[0m  [1m[32mINSERT INTO "zoos" ("name", "city", "state", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["name", "Bronx Zoo"], ["city", "New York"], ["state", "New York"], ["created_at", "2020-09-09 19:37:36.314556"], ["updated_at", "2020-09-09 19:37:36.314556"]]
+  [1m[35m (1.1ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mZoo Create (0.5ms)[0m  [1m[32mINSERT INTO "zoos" ("name", "city", "state", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["name", "Central Park Zoo"], ["city", "New York"], ["state", "New York"], ["created_at", "2020-09-09 19:37:36.323716"], ["updated_at", "2020-09-09 19:37:36.323716"]]
+  [1m[35m (1.0ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mZoo Create (0.4ms)[0m  [1m[32mINSERT INTO "zoos" ("name", "city", "state", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["name", "San Diego Zoo"], ["city", "San Diego"], ["state", "California"], ["created_at", "2020-09-09 19:37:36.330033"], ["updated_at", "2020-09-09 19:37:36.330033"]]
+  [1m[35m (1.1ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mSighting Create (2.0ms)[0m  [1m[32mINSERT INTO "sightings" ("animal", "exhibit", "date", "schedule", "accessibility", "description", "zoo_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)[0m  [["animal", "Aldabra Tortoise"], ["exhibit", "Zoo Center"], ["date", "04/14/20"], ["schedule", "Open year-round"], ["accessibility", "Wheelchair Accessible"], ["description", "I had no idea that tortoises could be so large!"], ["zoo_id", 1], ["created_at", "2020-09-09 19:37:36.357345"], ["updated_at", "2020-09-09 19:37:36.357345"]]
+  [1m[35m (1.4ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mSighting Create (0.5ms)[0m  [1m[32mINSERT INTO "sightings" ("animal", "exhibit", "date", "schedule", "accessibility", "description", "zoo_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)[0m  [["animal", "Red Panda"], ["exhibit", "Temperate Territory"], ["date", "06/25/20"], ["schedule", "Open year-round"], ["accessibility", "Steep Hill"], ["description", "This is the most adorable panda I've ever seen. Hard to see in the trees sometimes though"], ["zoo_id", 2], ["created_at", "2020-09-09 19:37:36.373374"], ["updated_at", "2020-09-09 19:37:36.373374"]]
+  [1m[35m (0.7ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mSighting Create (0.4ms)[0m  [1m[32mINSERT INTO "sightings" ("animal", "exhibit", "date", "schedule", "accessibility", "description", "zoo_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)[0m  [["animal", "Arctic Fox"], ["exhibit", "Northern Frontier"], ["date", "01/30/20"], ["schedule", "Late fall - winter"], ["accessibility", "Wheelchair Accessible"], ["description", "These foxes look so peaceful in the snow."], ["zoo_id", 3], ["created_at", "2020-09-09 19:37:36.378334"], ["updated_at", "2020-09-09 19:37:36.378334"]]
+  [1m[35m (1.1ms)[0m  [1m[36mcommit transaction[0m
