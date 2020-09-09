@@ -1,0 +1,19 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  animal: MyString
+  exhibit: MyString
+  date: MyString
+  schedule: MyString
+  accessibility: MyString
+  description: MyString
+  zoo: one
+
+two:
+  animal: MyString
+  exhibit: MyString
+  date: MyString
+  schedule: MyString
+  accessibility: MyString
+  description: MyString
+  zoo: two
