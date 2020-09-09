@@ -15,7 +15,7 @@ ActiveRecord::Schema.define(version: 2020_09_09_174454) do
   create_table "sightings", force: :cascade do |t|
     t.string "animal"
     t.string "exhibit"
-    t.date "date"
+    t.string "date"
     t.string "schedule"
     t.string "accessibility"
     t.string "description"
