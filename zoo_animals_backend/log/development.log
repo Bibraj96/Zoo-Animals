@@ -81,3 +81,24 @@ FOREIGN KEY ("zoo_id")
   [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
   [1m[36mSighting Create (0.4ms)[0m  [1m[32mINSERT INTO "sightings" ("animal", "exhibit", "date", "schedule", "accessibility", "description", "zoo_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)[0m  [["animal", "Arctic Fox"], ["exhibit", "Northern Frontier"], ["date", "01/30/20"], ["schedule", "Late fall - winter"], ["accessibility", "Wheelchair Accessible"], ["description", "These foxes look so peaceful in the snow."], ["zoo_id", 3], ["created_at", "2020-09-09 19:37:36.378334"], ["updated_at", "2020-09-09 19:37:36.378334"]]
   [1m[35m (1.1ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.6ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[36mZoo Load (0.2ms)[0m  [1m[34mSELECT "zoos".* FROM "zoos" LIMIT ?[0m  [["LIMIT", 11]]
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT COUNT(*) FROM "zoos"[0m
+  [1m[36mSighting Load (0.3ms)[0m  [1m[34mSELECT "sightings".* FROM "sightings" LIMIT ?[0m  [["LIMIT", 11]]
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT COUNT(*) FROM "sightings"[0m
+Started GET "/zoos" for ::1 at 2020-09-09 15:40:03 -0400
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by ZoosController#index as HTML
+  [1m[36mZoo Load (0.2ms)[0m  [1m[34mSELECT "zoos".* FROM "zoos"[0m
+  ↳ app/controllers/zoos_controller.rb:5:in `index'
+[active_model_serializers]   [1m[36mSighting Load (0.3ms)[0m  [1m[34mSELECT "sightings".* FROM "sightings" WHERE "sightings"."zoo_id" = ?[0m  [["zoo_id", 1]]
+[active_model_serializers]   ↳ app/controllers/zoos_controller.rb:5:in `index'
+[active_model_serializers]   [1m[36mSighting Load (0.1ms)[0m  [1m[34mSELECT "sightings".* FROM "sightings" WHERE "sightings"."zoo_id" = ?[0m  [["zoo_id", 2]]
+[active_model_serializers]   ↳ app/controllers/zoos_controller.rb:5:in `index'
+[active_model_serializers]   [1m[36mSighting Load (0.1ms)[0m  [1m[34mSELECT "sightings".* FROM "sightings" WHERE "sightings"."zoo_id" = ?[0m  [["zoo_id", 3]]
+[active_model_serializers]   ↳ app/controllers/zoos_controller.rb:5:in `index'
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with ActiveModelSerializers::Adapter::Attributes (48.17ms)
+Completed 200 OK in 97ms (Views: 90.8ms | ActiveRecord: 2.3ms | Allocations: 28102)
+
+
