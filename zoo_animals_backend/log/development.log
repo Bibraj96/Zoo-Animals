@@ -102,3 +102,29 @@ Processing by ZoosController#index as HTML
 Completed 200 OK in 97ms (Views: 90.8ms | ActiveRecord: 2.3ms | Allocations: 28102)
 
 
+Started GET "/zoos/1" for ::1 at 2020-09-10 11:03:24 -0400
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+Processing by ZoosController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mZoo Load (1.1ms)[0m  [1m[34mSELECT "zoos".* FROM "zoos" WHERE "zoos"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/zoos_controller.rb:9:in `show'
+[active_model_serializers]   [1m[36mSighting Load (1.5ms)[0m  [1m[34mSELECT "sightings".* FROM "sightings" WHERE "sightings"."zoo_id" = ?[0m  [["zoo_id", 1]]
+[active_model_serializers]   ↳ app/controllers/zoos_controller.rb:10:in `show'
+[active_model_serializers] Rendered ZooSerializer with ActiveModelSerializers::Adapter::Attributes (20.99ms)
+Completed 200 OK in 39ms (Views: 22.3ms | ActiveRecord: 2.6ms | Allocations: 14536)
+
+
+Started GET "/zoos" for ::1 at 2020-09-10 11:03:29 -0400
+Processing by ZoosController#index as HTML
+  [1m[36mZoo Load (0.4ms)[0m  [1m[34mSELECT "zoos".* FROM "zoos"[0m
+  ↳ app/controllers/zoos_controller.rb:5:in `index'
+[active_model_serializers]   [1m[36mSighting Load (0.2ms)[0m  [1m[34mSELECT "sightings".* FROM "sightings" WHERE "sightings"."zoo_id" = ?[0m  [["zoo_id", 1]]
+[active_model_serializers]   ↳ app/controllers/zoos_controller.rb:5:in `index'
+[active_model_serializers]   [1m[36mSighting Load (0.3ms)[0m  [1m[34mSELECT "sightings".* FROM "sightings" WHERE "sightings"."zoo_id" = ?[0m  [["zoo_id", 2]]
+[active_model_serializers]   ↳ app/controllers/zoos_controller.rb:5:in `index'
+[active_model_serializers]   [1m[36mSighting Load (0.2ms)[0m  [1m[34mSELECT "sightings".* FROM "sightings" WHERE "sightings"."zoo_id" = ?[0m  [["zoo_id", 3]]
+[active_model_serializers]   ↳ app/controllers/zoos_controller.rb:5:in `index'
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with ActiveModelSerializers::Adapter::Attributes (11.52ms)
+Completed 200 OK in 16ms (Views: 14.1ms | ActiveRecord: 1.1ms | Allocations: 5999)
+
+

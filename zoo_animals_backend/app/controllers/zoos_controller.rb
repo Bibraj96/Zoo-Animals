@@ -5,4 +5,9 @@ class ZoosController < ApplicationController
     render json: zoos
   end
 
+  def show
+    zoo = Zoo.find(params[:id])
+    render json: zoo
+  end
+
 end
