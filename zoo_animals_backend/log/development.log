@@ -2931,3 +2931,65 @@ puma (4.3.6) lib/puma/server.rb:713:in `handle_request'
 puma (4.3.6) lib/puma/server.rb:472:in `process_client'
 puma (4.3.6) lib/puma/server.rb:328:in `block in run'
 puma (4.3.6) lib/puma/thread_pool.rb:134:in `block in spawn_thread'
+Started GET "/zoos" for ::1 at 2020-09-11 14:38:20 -0400
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+Processing by ZoosController#index as */*
+  [1m[36mZoo Load (0.5ms)[0m  [1m[34mSELECT "zoos".* FROM "zoos"[0m
+  ↳ app/controllers/zoos_controller.rb:5:in `index'
+[active_model_serializers]   [1m[36mSighting Load (0.7ms)[0m  [1m[34mSELECT "sightings".* FROM "sightings" WHERE "sightings"."zoo_id" = ?[0m  [["zoo_id", 1]]
+[active_model_serializers]   ↳ app/controllers/zoos_controller.rb:5:in `index'
+[active_model_serializers]   [1m[36mSighting Load (0.2ms)[0m  [1m[34mSELECT "sightings".* FROM "sightings" WHERE "sightings"."zoo_id" = ?[0m  [["zoo_id", 2]]
+[active_model_serializers]   ↳ app/controllers/zoos_controller.rb:5:in `index'
+[active_model_serializers]   [1m[36mSighting Load (0.1ms)[0m  [1m[34mSELECT "sightings".* FROM "sightings" WHERE "sightings"."zoo_id" = ?[0m  [["zoo_id", 3]]
+[active_model_serializers]   ↳ app/controllers/zoos_controller.rb:5:in `index'
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with ActiveModelSerializers::Adapter::Attributes (28.45ms)
+Completed 200 OK in 48ms (Views: 40.3ms | ActiveRecord: 1.5ms | Allocations: 18115)
+
+
+Started POST "/zoos" for ::1 at 2020-09-11 14:38:40 -0400
+Processing by ZoosController#create as JSON
+  Parameters: {"name"=>"Florida", "zoo"=>{"name"=>"Florida"}}
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/zoos_controller.rb:14:in `create'
+  [1m[36mZoo Create (8.4ms)[0m  [1m[32mINSERT INTO "zoos" ("name", "created_at", "updated_at") VALUES (?, ?, ?)[0m  [["name", "Florida"], ["created_at", "2020-09-11 18:38:40.146147"], ["updated_at", "2020-09-11 18:38:40.146147"]]
+  ↳ app/controllers/zoos_controller.rb:14:in `create'
+  [1m[35m (1.4ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/zoos_controller.rb:14:in `create'
+[active_model_serializers]   [1m[36mSighting Load (0.2ms)[0m  [1m[34mSELECT "sightings".* FROM "sightings" WHERE "sightings"."zoo_id" = ?[0m  [["zoo_id", 4]]
+[active_model_serializers]   ↳ app/controllers/zoos_controller.rb:15:in `create'
+[active_model_serializers] Rendered ZooSerializer with ActiveModelSerializers::Adapter::Attributes (2.19ms)
+Completed 200 OK in 29ms (Views: 2.5ms | ActiveRecord: 10.1ms | Allocations: 4058)
+
+
+Started GET "/zoos" for ::1 at 2020-09-11 14:38:44 -0400
+Processing by ZoosController#index as HTML
+  [1m[36mZoo Load (0.2ms)[0m  [1m[34mSELECT "zoos".* FROM "zoos"[0m
+  ↳ app/controllers/zoos_controller.rb:5:in `index'
+[active_model_serializers]   [1m[36mSighting Load (0.2ms)[0m  [1m[34mSELECT "sightings".* FROM "sightings" WHERE "sightings"."zoo_id" = ?[0m  [["zoo_id", 1]]
+[active_model_serializers]   ↳ app/controllers/zoos_controller.rb:5:in `index'
+[active_model_serializers]   [1m[36mSighting Load (0.9ms)[0m  [1m[34mSELECT "sightings".* FROM "sightings" WHERE "sightings"."zoo_id" = ?[0m  [["zoo_id", 2]]
+[active_model_serializers]   ↳ app/controllers/zoos_controller.rb:5:in `index'
+[active_model_serializers]   [1m[36mSighting Load (0.2ms)[0m  [1m[34mSELECT "sightings".* FROM "sightings" WHERE "sightings"."zoo_id" = ?[0m  [["zoo_id", 3]]
+[active_model_serializers]   ↳ app/controllers/zoos_controller.rb:5:in `index'
+[active_model_serializers]   [1m[36mSighting Load (0.1ms)[0m  [1m[34mSELECT "sightings".* FROM "sightings" WHERE "sightings"."zoo_id" = ?[0m  [["zoo_id", 4]]
+[active_model_serializers]   ↳ app/controllers/zoos_controller.rb:5:in `index'
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with ActiveModelSerializers::Adapter::Attributes (12.52ms)
+Completed 200 OK in 15ms (Views: 13.0ms | ActiveRecord: 1.5ms | Allocations: 7425)
+
+
+Started GET "/zoos" for ::1 at 2020-09-11 14:39:18 -0400
+Processing by ZoosController#index as */*
+  [1m[36mZoo Load (0.3ms)[0m  [1m[34mSELECT "zoos".* FROM "zoos"[0m
+  ↳ app/controllers/zoos_controller.rb:5:in `index'
+[active_model_serializers]   [1m[36mSighting Load (0.5ms)[0m  [1m[34mSELECT "sightings".* FROM "sightings" WHERE "sightings"."zoo_id" = ?[0m  [["zoo_id", 1]]
+[active_model_serializers]   ↳ app/controllers/zoos_controller.rb:5:in `index'
+[active_model_serializers]   [1m[36mSighting Load (0.3ms)[0m  [1m[34mSELECT "sightings".* FROM "sightings" WHERE "sightings"."zoo_id" = ?[0m  [["zoo_id", 2]]
+[active_model_serializers]   ↳ app/controllers/zoos_controller.rb:5:in `index'
+[active_model_serializers]   [1m[36mSighting Load (0.1ms)[0m  [1m[34mSELECT "sightings".* FROM "sightings" WHERE "sightings"."zoo_id" = ?[0m  [["zoo_id", 3]]
+[active_model_serializers]   ↳ app/controllers/zoos_controller.rb:5:in `index'
+[active_model_serializers]   [1m[36mSighting Load (0.2ms)[0m  [1m[34mSELECT "sightings".* FROM "sightings" WHERE "sightings"."zoo_id" = ?[0m  [["zoo_id", 4]]
+[active_model_serializers]   ↳ app/controllers/zoos_controller.rb:5:in `index'
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with ActiveModelSerializers::Adapter::Attributes (33.54ms)
+Completed 200 OK in 38ms (Views: 35.8ms | ActiveRecord: 1.4ms | Allocations: 7430)
+
+

@@ -12,7 +12,13 @@ class ZoosController < ApplicationController
 
   def create
     zoo = Zoo.create(zoo_params)
-    render json: dog
+    render json: zoo
+  end
+
+  private 
+
+  def zoo_params
+    params.require(:zoo).permit(:name, :city, :state)
   end
 
 end
