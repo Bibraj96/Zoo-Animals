@@ -6,9 +6,31 @@ class Zoo {
     this.state = data.state
     this.sightings = data.sightings
   }
+
+  static newZooForm() {
+    let newZooFormDiv = document.getElementById('new-zoo')
+    newZooFormDiv.innerHTML += `
+      <form>
+        <label>Name: </label><br/>
+        <input type="text" id="name"><br/>
+        <input type="hidden" id="zoo-id"
+        <label>City: </label><br/>
+        <input type="text" id="city"><br/>
+        <label>State: </label><br/>
+        <input type="text" id="state"><br/><br/>
+        <input type="submit" value="Add New Zoo">
+      </form>
+      <br/>
+    `
+  }
 }
 
-document.addEventListener("DOMContentLoaded", getZoos())
+document.addEventListener("DOMContentLoaded", init())
+
+function init() {
+  getZoos()
+  Zoo.newZooForm()
+}
 
 function attachListeners() {
 
