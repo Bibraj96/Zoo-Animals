@@ -10,4 +10,9 @@ class ZoosController < ApplicationController
     render json: zoo
   end
 
+  def create
+    zoo = Zoo.create(zoo_params)
+    render json: dog
+  end
+
 end
