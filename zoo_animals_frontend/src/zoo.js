@@ -10,7 +10,7 @@ class Zoo {
   static newZooForm() {
     let newZooFormDiv = document.getElementById('new-zoo')
     newZooFormDiv.innerHTML += `
-      <form>
+      <form id="add-zoo">
         <label>Name: </label><br/>
         <input type="text" id="name"><br/>
         <input type="hidden" id="zoo-id"
@@ -37,6 +37,8 @@ function attachListeners() {
   document.querySelectorAll('.get-sightings').forEach(element => {
     element.addEventListener("click", loadSightings)
   }) 
+
+  document.getElementById('add-zoo').addEventListener("submit", createZoo)
   
 }
 
@@ -57,6 +59,26 @@ function getZoos() {
     });
     zoos.innerHTML = output;
     attachListeners()
+  })
+}
+
+function createZoo(e) {
+  e.preventDefault();
+
+   const zoo = {
+     name: document.getElementById('name').value,
+     name: document.getElementById('city').value,
+     name: document.getElementById('state').value
+  }
+
+  fetch("http://localhost:3000/zoos", {
+    method: 'POST',
+    body: JSON.stringify(zoo),
+    headers: {'Content-Type': 'application/json', 'Accept': 'application/json'}
+   })
+   .then(resp => resp.json())
+   .then(zoo => {
+     console.log(zoo)
   })
 }
 
