@@ -1,12 +1,14 @@
+class Zoo {
+  constructor(data) {
+    this.id = data.id
+    this.name = data.name
+    this.city = data.city
+    this.state = data.state
+    this.sightings = data.sightings
+  }
+}
+
 document.addEventListener("DOMContentLoaded", getZoos())
-
-// function init() {
-//   getZoos()
-// }
-
-// document.querySelectorAll(".get-sightings").forEach(element => {
-//   element.addEventListener("click", loadSightings);
-// }) 
 
 function attachListeners() {
 
@@ -25,9 +27,8 @@ function getZoos() {
     data.forEach(function(zoo){
       output += `
         <ul>
-          <li>Name: ${zoo.name}</li>
-          <li>City: ${zoo.city}</li>
-          <li>State: ${zoo.state}</li>
+          <li>${zoo.name}</li>
+          <li>${zoo.city}, ${zoo.state}</li>
         </ul>
         <button class="get-sightings">Sightings</button>
       `;
