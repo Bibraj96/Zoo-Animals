@@ -67,8 +67,8 @@ function createZoo(e) {
 
    const zoo = {
      name: document.getElementById('name').value,
-     name: document.getElementById('city').value,
-     name: document.getElementById('state').value
+     city: document.getElementById('city').value,
+     state: document.getElementById('state').value
   }
 
   fetch("http://localhost:3000/zoos", {
