@@ -15,6 +15,14 @@ class ZoosController < ApplicationController
     render json: zoo
   end
 
+  def destroy
+    zoo = Zoo.find_by(id: params[:id])
+    zoo.destroy
+    render json: zoo
+  end
+  
+end
+
   private 
 
   def zoo_params
