@@ -86,7 +86,7 @@ function createZoo(e) {
    })
    .then(resp => resp.json())
    .then(zoo => {
-     console.log(zoo)
+     getZoos()
   })
 }
 
