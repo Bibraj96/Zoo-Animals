@@ -20,8 +20,6 @@ class ZoosController < ApplicationController
     zoo.destroy
     render json: zoo
   end
-  
-end
 
   private 
 
