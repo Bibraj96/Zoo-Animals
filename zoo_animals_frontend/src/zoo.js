@@ -54,7 +54,7 @@ function getZoos() {
     let output = '<h2>Zoos</h2>'
     data.forEach(function(zoo){
       output += `
-        <div class="card" data-zoo-id="${zoo.id}"
+        <div class="card" data-zoo-id="${zoo.id}">
           <ul>
             <li>${zoo.name}</li>
             <li>${zoo.city}, ${zoo.state}</li>
