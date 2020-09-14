@@ -38,6 +38,10 @@ function attachListeners() {
     element.addEventListener("click", loadSightings)
   }) 
 
+  document.querySelectorAll('.delete-zoo').forEach(element => {
+    element.addEventListener("click", deleteZoo)
+  })
+
   document.getElementById('add-zoo').addEventListener("submit", createZoo)
   
 }
@@ -50,13 +54,15 @@ function getZoos() {
     let output = '<h2>Zoos</h2>'
     data.forEach(function(zoo){
       output += `
-        <ul data-zoo-id="${zoo.id}">
-          <li>${zoo.name}</li>
-          <li>${zoo.city}, ${zoo.state}</li>
-        </ul>
-        <button class="get-sightings">Sightings</button>
-        <button class="edit-zoo">Edit Zoo</button>
-        <button class="delete-zoo">Delete Zoo</button>
+        <div class="card" data-zoo-id="${zoo.id}"
+          <ul>
+            <li>${zoo.name}</li>
+            <li>${zoo.city}, ${zoo.state}</li>
+          </ul>
+          <button class="get-sightings">Sightings</button>
+          <button class="edit-zoo">Edit Zoo</button>
+          <button class="delete-zoo">Delete Zoo</button>
+        </div><br/>
       `;
     });
     zoos.innerHTML = output;
@@ -81,6 +87,21 @@ function createZoo(e) {
    .then(resp => resp.json())
    .then(zoo => {
      console.log(zoo)
+  })
+}
+
+function deleteZoo() {
+  // console.log(this.parentElement.getAttribute('data-zoo-id'))
+  let zooId = this.parentElement.getAttribute('data-zoo-id')
+
+  fetch(`http://localhost:3000/zoos/${zooId}`, {
+    method: 'DELETE',
+    headers: {'Content-Type': 'application/json', 'Accept': 'application/json'}
+  })
+  .then(resp => resp.json())
+  .then(json => {
+    let selectedZoo = document.querySelector(`.card[data-zoo-id="${zooId}"]`)
+    selectedZoo.remove()
   })
 }
 
