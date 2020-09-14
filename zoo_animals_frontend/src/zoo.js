@@ -55,6 +55,8 @@ function getZoos() {
           <li>${zoo.city}, ${zoo.state}</li>
         </ul>
         <button class="get-sightings">Sightings</button>
+        <button class="edit-zoo">Edit Zoo</button>
+        <button class="delete-zoo">Delete Zoo</button>
       `;
     });
     zoos.innerHTML = output;
