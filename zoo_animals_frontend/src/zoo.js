@@ -13,7 +13,7 @@ class Zoo {
       <form id="add-zoo">
         <label>Name: </label><br/>
         <input type="text" id="name"><br/>
-        <input type="hidden" id="zoo-id"
+        <input type="hidden" id="zoo-id">
         <label>City: </label><br/>
         <input type="text" id="city"><br/>
         <label>State: </label><br/>
@@ -24,10 +24,10 @@ class Zoo {
     `
   }
 
-  static editZooForm() {
-    let editZooFormDiv = document.getElementById('new-zoo')
+  static editZooForm(id) {
+    let editZooFormDiv = document.getElementById(`edit-zoo-form-${id}`)
     editZooFormDiv.innerHTML += `
-      <form id="add-zoo">
+      <form id="edit-zoo">
         <label>Name: </label><br/>
         <input type="text" id="name"><br/>
         <input type="hidden" id="zoo-id"
@@ -56,7 +56,7 @@ function attachListeners() {
     element.addEventListener("click", loadSightings)
   }) 
 
-  document.querySelectorAll('.edit-zoo').forEach(element => {
+  document.querySelectorAll('.edit-zoo-button').forEach(element => {
     element.addEventListener("click", editZoo)
   })
 
@@ -81,8 +81,9 @@ function getZoos() {
             <li>${zoo.name}</li>
             <li>${zoo.city}, ${zoo.state}</li>
           </ul>
+          <div id=edit-zoo-form-${zoo.id}></div>
           <button class="get-sightings">Sightings</button>
-          <button class="edit-zoo">Edit Zoo</button>
+          <button class="edit-zoo-button">Edit Zoo</button>
           <button class="delete-zoo">Delete Zoo</button>
         </div><br/>
       `;
@@ -118,8 +119,8 @@ function editZoo() {
   fetch(`http://localhost:3000/zoos/${zooId}`)
   .then(resp => resp.json())
   .then(data => {
-    Zoo.editZooForm()
-    let zooForm = document.getElementById('new-zoo')
+    Zoo.editZooForm(data.id)
+    let zooForm = document.getElementById(`edit-zoo-form-${data.id}`)
     zooForm.querySelector('#name').value = data.name
     zooForm.querySelector('#city').value = data.city
     zooForm.querySelector('#state').value = data.state
