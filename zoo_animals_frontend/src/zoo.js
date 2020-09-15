@@ -30,7 +30,7 @@ class Zoo {
       <form id="edit-zoo">
         <label>Name: </label><br/>
         <input type="text" id="name"><br/>
-        <input type="hidden" id="zoo-id"
+        <input type="hidden" id="zoo-id">
         <label>City: </label><br/>
         <input type="text" id="city"><br/>
         <label>State: </label><br/>
@@ -66,6 +66,10 @@ function attachListeners() {
 
   document.getElementById('add-zoo').addEventListener("submit", createZoo)
   
+}
+
+function editFormListener() {
+  document.getElementById('edit-zoo').addEventListener("submit", updateZoo)
 }
 
 function getZoos() {
@@ -124,6 +128,28 @@ function editZoo() {
     zooForm.querySelector('#name').value = data.name
     zooForm.querySelector('#city').value = data.city
     zooForm.querySelector('#state').value = data.state
+    editFormListener()
+  })
+}
+
+function updateZoo(e) {
+  e.preventDefault();
+  let zooId = this.parentElement.parentElement.getAttribute('data-zoo-id')
+
+  const zoo = {
+    name: document.getElementById('name').value,
+    city: document.getElementById('city').value,
+    state: document.getElementById('state').value
+  }
+
+  fetch(`http://localhost:3000/zoos/${zooId}`, {
+    method: 'PATCH',
+    body: JSON.stringify(zoo),
+    headers: {'Content-Type': 'application/json', 'Accept': 'application/json'}
+  })
+  .then(resp => resp.json())
+  .then(zoo => {
+    getZoos()
   })
 }
 
