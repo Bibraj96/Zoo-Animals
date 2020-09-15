@@ -15,6 +15,16 @@ class ZoosController < ApplicationController
     render json: zoo
   end
 
+  def update
+    zoo = Zoo.find(params[:id])
+    zoo.update(zoo_params)
+    if zoo.save
+      render json: zoo
+    else
+      render json: {errors: zoo.errors.full_messages}
+    end
+  end
+
   def destroy
     zoo = Zoo.find_by(id: params[:id])
     zoo.destroy
