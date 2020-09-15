@@ -23,6 +23,24 @@ class Zoo {
       <br/>
     `
   }
+
+  static editZooForm() {
+    let editZooFormDiv = document.getElementById('new-zoo')
+    editZooFormDiv.innerHTML += `
+      <form id="add-zoo">
+        <label>Name: </label><br/>
+        <input type="text" id="name"><br/>
+        <input type="hidden" id="zoo-id"
+        <label>City: </label><br/>
+        <input type="text" id="city"><br/>
+        <label>State: </label><br/>
+        <input type="text" id="state"><br/><br/>
+        <input type="submit" value="Edit Zoo">
+      </form>
+      <br/>
+    `
+  }
+
 }
 
 document.addEventListener("DOMContentLoaded", init())
@@ -37,6 +55,10 @@ function attachListeners() {
   document.querySelectorAll('.get-sightings').forEach(element => {
     element.addEventListener("click", loadSightings)
   }) 
+
+  document.querySelectorAll('.edit-zoo').forEach(element => {
+    element.addEventListener("click", editZoo)
+  })
 
   document.querySelectorAll('.delete-zoo').forEach(element => {
     element.addEventListener("click", deleteZoo)
@@ -87,6 +109,20 @@ function createZoo(e) {
    .then(resp => resp.json())
    .then(zoo => {
      getZoos()
+  })
+}
+
+function editZoo() {
+  let zooId = this.parentElement.getAttribute('data-zoo-id')
+
+  fetch(`http://localhost:3000/zoos/${zooId}`)
+  .then(resp => resp.json())
+  .then(data => {
+    Zoo.editZooForm()
+    let zooForm = document.getElementById('new-zoo')
+    zooForm.querySelector('#name').value = data.name
+    zooForm.querySelector('#city').value = data.city
+    zooForm.querySelector('#state').value = data.state
   })
 }
 
