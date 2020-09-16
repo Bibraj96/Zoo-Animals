@@ -129,6 +129,7 @@ function editZoo() {
     zooForm.querySelector('#zoo-id').value = data.id
     zooForm.querySelector('#city').value = data.city
     zooForm.querySelector('#state').value = data.state
+    editFormListener()
   })
 }
 
@@ -167,8 +168,4 @@ function deleteZoo() {
     let selectedZoo = document.querySelector(`.card[data-zoo-id="${zooId}"]`)
     selectedZoo.remove()
   })
-}
-
-function loadSightings() {
-  console.log("This button works")
 }
