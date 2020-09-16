@@ -16,7 +16,7 @@ class ZoosController < ApplicationController
   end
 
   def update
-    zoo = Zoo.find(params[:id])
+    zoo = Zoo.find_by(id: params[:id])
     zoo.update(zoo_params)
     if zoo.save
       render json: zoo
