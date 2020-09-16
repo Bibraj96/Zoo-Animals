@@ -126,9 +126,9 @@ function editZoo() {
     Zoo.editZooForm(data.id)
     let zooForm = document.getElementById(`edit-zoo-form-${data.id}`)
     zooForm.querySelector('#name').value = data.name
+    zooForm.querySelector('#zoo-id').value = data.id
     zooForm.querySelector('#city').value = data.city
     zooForm.querySelector('#state').value = data.state
-    editFormListener()
   })
 }
 
@@ -149,6 +149,7 @@ function updateZoo(e) {
   })
   .then(resp => resp.json())
   .then(zoo => {
+    editFormListener()
     getZoos()
   })
 }
