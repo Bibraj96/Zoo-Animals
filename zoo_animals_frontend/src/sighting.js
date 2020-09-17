@@ -5,12 +5,30 @@ class Sighting {
     this.exhibit = data.exhibit
     this.schedule = data.schedule
     this.date = data.date
-    this.dsecription = data.description
+    this.description = data.description
     this.accessibility = data.accessibility
   }
 
   static newSightingForm() {
-    
+    let newSightingFormDiv = document.getElementById('new-sighting-form')
+    newSightingFormDiv.innerHTML += `
+    <form id="add-sighting">
+    <label>Animal: </label><br/>
+    <input type="text" id="animal"><br/>
+    <input type="hidden" id="sighting-id">
+    <label>Exhibit: </label><br/>
+    <input type="text" id="exhibit"><br/>
+    <label>Schedule: </label><br/>
+    <input type="text" id="schedule"><br/>
+    <label>Date: </label><br/>
+    <input type="text" id="date"><br/>
+    <label>Description: </label><br/>
+    <input type="text" id="description"><br/>
+    <label>Accessibility: </label><br/>
+    <input type="text" id="accessibility"><br/>
+    <input type="submit" value="Add New Zoo">
+  </form>
+  `
   }
 }
 
@@ -25,6 +43,7 @@ function loadSightings() {
     data.forEach(function(sighting) {
       if(sighting.zoo.id == zooId) {
         output += `
+        <div id="new-sighting-form"></div>
         <p>Animal: ${sighting.animal}</p>
         <p>Exhibit: ${sighting.exhibit} / Schedule: ${sighting.schedule}</p>
         <p>Date: ${sighting.date} </p>
