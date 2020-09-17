@@ -1,3 +1,12 @@
+class Zoo {
+  constructor(data) {
+    this.id = data.id
+    this.name = data.name
+    this.city = data.city
+    this.state = data.state
+    this.sightings = data.sightings
+  }
+
 function loadSightings() {
   let zooId = this.parentElement.getAttribute('data-zoo-id')
 
@@ -5,7 +14,7 @@ function loadSightings() {
   .then(resp => resp.json())
   .then(data => {
     let sightingDiv = document.getElementById(`sighting-${zooId}`)
-    let output = ``
+    let output = `<button class="add-sighting">Add a Sighting</button>`
     data.forEach(function(sighting) {
       if(sighting.zoo.id == zooId) {
         output += `
