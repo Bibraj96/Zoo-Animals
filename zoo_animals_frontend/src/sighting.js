@@ -25,8 +25,8 @@ class Sighting {
     <label>Description: </label><br/>
     <input type="text" id="description"><br/>
     <label>Accessibility: </label><br/>
-    <input type="text" id="accessibility"><br/>
-    <input type="submit" value="Add New Zoo">
+    <input type="text" id="accessibility"><br/><br/>
+    <input type="submit" value="Add New Sighting">
   </form>
   `
   }
@@ -39,7 +39,7 @@ function loadSightings() {
   .then(resp => resp.json())
   .then(data => {
     let sightingDiv = document.getElementById(`sighting-${zooId}`)
-    let output = `<button class="add-sighting">Add a Sighting</button>`
+    let output = `<button id="add-sighting">Add a Sighting</button>`
     data.forEach(function(sighting) {
       if(sighting.zoo.id == zooId) {
         output += `
@@ -53,5 +53,6 @@ function loadSightings() {
       }
     })
     sightingDiv.innerHTML = output
+    document.getElementById('add-sighting').addEventListener("click", Sighting.newSightingForm)
     })
 }
