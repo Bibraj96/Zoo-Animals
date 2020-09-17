@@ -1,21 +1,22 @@
 function loadSightings() {
   let zooId = this.parentElement.getAttribute('data-zoo-id')
-  let sightingDiv = document.getElementById(`sighting-${zooId}`)
 
   fetch("http://localhost:3000/sightings")
   .then(resp => resp.json())
   .then(data => {
+    let sightingDiv = document.getElementById(`sighting-${zooId}`)
+    let output = ``
     data.forEach(function(sighting) {
-      if (sighting.zooId == zooId) {
-
+      if(sighting.zoo.id == zooId) {
+        output += `
+        <p>Animal: ${sighting.animal}</p>
+        <p>Exhibit: ${sighting.exhibit} / Schedule: ${sighting.schedule}</p>
+        <p>Date: ${sighting.date} </p>
+        <p>Description: ${sighting.description}</p>
+        <p>Accessibility: ${sighting.accessibility}</p>
+        `
       }
-      // if(sighting.zoo.id == zooId) {
-      //   console.log(sighting.animal)
-      // } else {
-      //   console.log(sighting.id)
-      // }
     })
+    sightingDiv.innerHTML = output
     })
-  // console.log("This button works")
-  // console.log(this.parentElement.getAttribute('data-zoo-id'))
 }
