@@ -157,7 +157,6 @@ function updateZoo(e) {
 }
 
 function deleteZoo() {
-  // console.log(this.parentElement.getAttribute('data-zoo-id'))
   let zooId = this.parentElement.getAttribute('data-zoo-id')
 
   fetch(`http://localhost:3000/zoos/${zooId}`, {
