@@ -1,11 +1,18 @@
-class Zoo {
+class Sighting {
   constructor(data) {
     this.id = data.id
-    this.name = data.name
-    this.city = data.city
-    this.state = data.state
-    this.sightings = data.sightings
+    this.animal = data.animal
+    this.exhibit = data.exhibit
+    this.schedule = data.schedule
+    this.date = data.date
+    this.dsecription = data.description
+    this.accessibility = data.accessibility
   }
+
+  static newSightingForm() {
+    
+  }
+}
 
 function loadSightings() {
   let zooId = this.parentElement.getAttribute('data-zoo-id')
