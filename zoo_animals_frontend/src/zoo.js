@@ -113,7 +113,8 @@ function createZoo(e) {
     headers: {'Content-Type': 'application/json', 'Accept': 'application/json'}
    })
    .then(resp => resp.json())
-   .then(zoo => {
+   .then(json => {
+     let newZoo = new Zoo(json)
      getZoos()
   })
 }
