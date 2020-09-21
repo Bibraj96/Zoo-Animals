@@ -69,16 +69,15 @@ function loadSightings() {
 
 function createSighting(e) {
   e.preventDefault();
-  let zooId = this.parentElement.parentElement.parentElement.getAttribute('data-zoo-id')
-
-  const sighting = {
+  let zooId = this.parentElement.parentElement.parentElement.parentElement.getAttribute('data-zoo-id')
+    const sighting = {
     animal: document.getElementById('animal').value,
     exhibit: document.getElementById('exhibit').value,
     schedule: document.getElementById('schedule').value,
     date: document.getElementById('date').value,
     description: document.getElementById('description').value,
     accessibility: document.getElementById('accessibility').value,
-    zoo_id: document.getElementById('sighting-zoo-id').value
+    zoo_id: zooId
   }
 
   fetch("http://localhost:3000/sightings", {
