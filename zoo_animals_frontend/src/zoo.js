@@ -85,7 +85,7 @@ function getZoos() {
             <li>${zoo.name}</li>
             <li>${zoo.city}, ${zoo.state}</li>
           </ul>
-          <div id=sighting-${zoo.id}></div>
+          <div id=sighting-zoo-${zoo.id}></div>
           <div id=edit-zoo-form-${zoo.id}></div>
           <button class="get-sightings">Sightings</button>
           <button class="edit-zoo-button">Edit Zoo</button>
