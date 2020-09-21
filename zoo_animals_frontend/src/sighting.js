@@ -48,7 +48,7 @@ function loadSightings() {
       if(sighting.zoo.id == zooId) {
         console.log(sighting.zoo.id)
         output += `
-        <div data-sighting-id="${sighting.id}">
+        <div class="card" data-sighting-id="${sighting.id}">
         <div id="new-sighting-form"></div>
         <p>Animal: ${sighting.animal}</p>
         <p>Exhibit: ${sighting.exhibit} / Schedule: ${sighting.schedule}</p>
@@ -103,15 +103,15 @@ function createSighting(e) {
 
 function deleteSighting() {
   console.log(this.parentElement.getAttribute('data-sighting-id'))
-  // let zooId = this.parentElement.getAttribute('data-zoo-id')
+  let sightingId = this.parentElement.getAttribute('data-sighting-id')
 
-  // fetch(`http://localhost:3000/zoos/${zooId}`, {
-  //   method: 'DELETE',
-  //   headers: {'Content-Type': 'application/json', 'Accept': 'application/json'}
-  // })
-  // .then(resp => resp.json())
-  // .then(json => {
-  //   let selectedZoo = document.querySelector(`.card[data-zoo-id="${zooId}"]`)
-  //   selectedZoo.remove()
-  // })
+  fetch(`http://localhost:3000/sightings/${sightingId}`, {
+    method: 'DELETE',
+    headers: {'Content-Type': 'application/json', 'Accept': 'application/json'}
+  })
+  .then(resp => resp.json())
+  .then(json => {
+    let selectedSighting = document.querySelector(`.card[data-sighting-id="${sightingId}"]`)
+    selectedSighting.remove()
+  })
 }
