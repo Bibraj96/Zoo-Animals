@@ -55,6 +55,7 @@ function loadSightings() {
         <p>Date: ${sighting.date} </p>
         <p>Description: ${sighting.description}</p>
         <p>Accessibility: ${sighting.accessibility}</p>
+        <button class="delete-sighting-button">Delete Sighting</button>
         </div>
         `
       }
@@ -64,8 +65,15 @@ function loadSightings() {
     document.querySelectorAll('.add-sighting-button').forEach(element => {
       element.addEventListener("click", Sighting.newSightingForm)
     })
+    document.querySelectorAll('.delete-sighting-button').forEach(element => {
+      element.addEventListener("click", deleteSighting)
+    })
   })
 }
+
+document.querySelectorAll('.delete-sighting-button').forEach(element => {
+  element.addEventListener("click", deleteSighting)
+})
 
 function createSighting(e) {
   e.preventDefault();
@@ -91,4 +99,19 @@ function createSighting(e) {
     console.log(newSighting)
     // getZoos()
   })
+}
+
+function deleteSighting() {
+  console.log(this.parentElement.getAttribute('data-sighting-id'))
+  // let zooId = this.parentElement.getAttribute('data-zoo-id')
+
+  // fetch(`http://localhost:3000/zoos/${zooId}`, {
+  //   method: 'DELETE',
+  //   headers: {'Content-Type': 'application/json', 'Accept': 'application/json'}
+  // })
+  // .then(resp => resp.json())
+  // .then(json => {
+  //   let selectedZoo = document.querySelector(`.card[data-zoo-id="${zooId}"]`)
+  //   selectedZoo.remove()
+  // })
 }
