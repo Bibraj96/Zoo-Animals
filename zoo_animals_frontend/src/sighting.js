@@ -36,6 +36,22 @@ class Sighting {
   
 }
 
+function attachSightingListeners() {
+  document.getElementById('add-sighting-button').addEventListener("click", Sighting.newSightingForm)
+
+  document.querySelectorAll('.add-sighting-button').forEach(element => {
+    element.addEventListener("click", Sighting.newSightingForm)
+  })
+
+  document.querySelectorAll('.delete-sighting-button').forEach(element => {
+    element.addEventListener("click", deleteSighting)
+  })
+
+  document.querySelectorAll('.delete-sighting-button').forEach(element => {
+    element.addEventListener("click", deleteSighting)
+  })
+}
+
 function loadSightings() {
   let zooId = this.parentElement.getAttribute('data-zoo-id')
 
@@ -43,10 +59,12 @@ function loadSightings() {
   .then(resp => resp.json())
   .then(data => {
     let sightingDiv = document.getElementById(`sighting-zoo-${zooId}`)
-    let output = `<button id="add-sighting-button">Add a Sighting</button>`
+    let output = `
+    <button id="add-sighting-button">Add a Sighting</button>
+    <div id="new-sighting-form"></div>
+    `
     data.forEach(function(sighting) {
       if(sighting.zoo.id == zooId) {
-        console.log(sighting.zoo.id)
         output += `
         <div class="card" data-sighting-id="${sighting.id}">
         <div id="new-sighting-form"></div>
@@ -61,23 +79,14 @@ function loadSightings() {
       }
     })
     sightingDiv.innerHTML = output
-    document.getElementById('add-sighting-button').addEventListener("click", Sighting.newSightingForm)
-    document.querySelectorAll('.add-sighting-button').forEach(element => {
-      element.addEventListener("click", Sighting.newSightingForm)
-    })
-    document.querySelectorAll('.delete-sighting-button').forEach(element => {
-      element.addEventListener("click", deleteSighting)
-    })
+    attachSightingListeners()
   })
 }
 
-document.querySelectorAll('.delete-sighting-button').forEach(element => {
-  element.addEventListener("click", deleteSighting)
-})
-
 function createSighting(e) {
   e.preventDefault();
-  let zooId = this.parentElement.parentElement.parentElement.parentElement.getAttribute('data-zoo-id')
+  let zooId = this.parentElement.parentElement.parentElement.getAttribute('data-zoo-id')
+
     const sighting = {
     animal: document.getElementById('animal').value,
     exhibit: document.getElementById('exhibit').value,
@@ -97,7 +106,6 @@ function createSighting(e) {
   .then(json => {
     let newSighting = new Sighting(json)
     console.log(newSighting)
-    // getZoos()
   })
 }
 
