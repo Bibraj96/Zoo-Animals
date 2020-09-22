@@ -115,6 +115,8 @@ function createZoo(e) {
    .then(resp => resp.json())
    .then(json => {
      let newZoo = new Zoo(json)
+     clearZooHtml()
+     Zoo.newZooForm()
      getZoos()
   })
 }
@@ -169,4 +171,9 @@ function deleteZoo() {
     let selectedZoo = document.querySelector(`.card[data-zoo-id="${zooId}"]`)
     selectedZoo.remove()
   })
+}
+
+function clearZooHtml() {
+  let zooForm = document.getElementById("new-zoo")
+  zooForm.innerHTML = ''
 }
