@@ -18,7 +18,7 @@ class Zoo {
         <input type="text" id="city"><br/>
         <label>State: </label><br/>
         <input type="text" id="state"><br/><br/>
-        <input type="submit" value="Add New Zoo">
+        <input class="btn btn-success mr-4" type="submit" value="Add New Zoo">
       </form>
       <br/>
     `
@@ -77,19 +77,19 @@ function getZoos() {
   .then((res) => res.json())
   .then((data) => {
     let zoos = document.getElementById('zoos');
-    let output = '<h2>Zoos</h2>'
+    let output = '<h2 class="display-4 mb-4">Zoos</h2>'
     data.forEach(function(zoo){
       output += `
-        <div class="card" data-zoo-id="${zoo.id}">
-          <ul>
-            <li>${zoo.name}</li>
-            <li>${zoo.city}, ${zoo.state}</li>
+        <div class="container" data-zoo-id="${zoo.id}">
+          <ul class="list-group mb-3">
+            <li class="list-group-item">${zoo.name}</li>
+            <li class="list-group-item">${zoo.city}, ${zoo.state}</li>
           </ul>
           <div id=sighting-zoo-${zoo.id}></div>
           <div id=edit-zoo-form-${zoo.id}></div>
-          <button class="get-sightings">Sightings</button>
-          <button class="edit-zoo-button">Edit Zoo</button>
-          <button class="delete-zoo">Delete Zoo</button>
+          <button class="get-sightings btn btn-info mr-4">Sightings</button>
+          <button class="edit-zoo-button btn btn-warning mr-4">Edit Zoo</button>
+          <button class="delete-zoo btn btn-danger mr-4">Delete Zoo</button>
         </div><br/>
       `;
     });
@@ -115,7 +115,7 @@ function createZoo(e) {
    .then(resp => resp.json())
    .then(json => {
      let newZoo = new Zoo(json)
-     clearZooHtml()
+     clearZooFormHtml()
      Zoo.newZooForm()
      getZoos()
   })
@@ -168,12 +168,18 @@ function deleteZoo() {
   })
   .then(resp => resp.json())
   .then(json => {
-    let selectedZoo = document.querySelector(`.card[data-zoo-id="${zooId}"]`)
+    let selectedZoo = document.querySelector(`.container[data-zoo-id="${zooId}"]`)
     selectedZoo.remove()
   })
 }
 
-function clearZooHtml() {
+function clearZooFormHtml() {
   let zooForm = document.getElementById("new-zoo")
   zooForm.innerHTML = ''
+}
+
+function clearZoosHtml() {
+  let zooDiv = document.getElementById("zoos")
+  zooDiv.innerHTML = ''
+  getZoos()
 }
