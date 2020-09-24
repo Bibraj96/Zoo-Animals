@@ -23,12 +23,12 @@ class Sighting {
     <label>Schedule: </label><br/>
     <input type="text" id="schedule"><br/>
     <label>Date: </label><br/>
-    <input type="text" id="date"><br/>
+    <input type="text" id="date" placeholder="MM/DD/YY"><br/>
     <label>Description: </label><br/>
-    <input type="text" id="description"><br/>
+    <textarea type="text" id="description"></textarea><br/>
     <label>Accessibility: </label><br/>
     <input type="text" id="accessibility"><br/><br/>
-    <input type="submit" value="Add New Sighting">
+    <input class="btn btn-info mb-4 mr-4" type="submit" value="Add New Sighting">
   </form>
   `
   document.getElementById('add-sighting').addEventListener("submit", createSighting)
@@ -50,6 +50,9 @@ function attachSightingListeners() {
   document.querySelectorAll('.delete-sighting-button').forEach(element => {
     element.addEventListener("click", deleteSighting)
   })
+  document.querySelectorAll('.close-sighting-button').forEach(element => {
+    element.addEventListener("click", clearZoosHtml)
+  })
 }
 
 function loadSightings() {
@@ -60,20 +63,21 @@ function loadSightings() {
   .then(data => {
     let sightingDiv = document.getElementById(`sighting-zoo-${zooId}`)
     let output = `
-    <button id="add-sighting-button">Add a Sighting</button>
+    <button id="add-sighting-button" class="btn btn-success mb-4 mr-4">Add a Sighting</button>
     <div id="new-sighting-form"></div>
     `
     data.forEach(function(sighting) {
       if(sighting.zoo.id == zooId) {
         output += `
-        <div class="card" data-sighting-id="${sighting.id}">
+        <div class="card card-body mb-3" data-sighting-id="${sighting.id}">
         <div id="new-sighting-form"></div>
         <p>Animal: ${sighting.animal}</p>
         <p>Exhibit: ${sighting.exhibit} / Schedule: ${sighting.schedule}</p>
         <p>Date: ${sighting.date} </p>
         <p>Description: ${sighting.description}</p>
         <p>Accessibility: ${sighting.accessibility}</p>
-        <button class="delete-sighting-button">Delete Sighting</button>
+        <button class="delete-sighting-button btn btn-danger mb-4 mr-4">Delete Sighting</button>
+        <button class="close-sighting-button btn btn-outline-warning mb-4 mr-4">Close Sightings</button>
         </div>
         `
       }
@@ -106,6 +110,7 @@ function createSighting(e) {
   .then(json => {
     let newSighting = new Sighting(json)
     console.log(newSighting)
+    getZoos()
   })
 }
 
