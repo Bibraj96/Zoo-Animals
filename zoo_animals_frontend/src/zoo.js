@@ -18,7 +18,7 @@ class Zoo {
         <input type="text" id="city"><br/>
         <label>State: </label><br/>
         <input type="text" id="state"><br/><br/>
-        <input class="btn btn-success mr-4" type="submit" value="Add New Zoo">
+        <input class="btn btn-outline-success mr-4" type="submit" value="Add New Zoo">
       </form>
       <br/>
     `
@@ -56,9 +56,9 @@ function attachListeners() {
     element.addEventListener("click", loadSightings)
   }) 
 
-  document.querySelectorAll('.edit-zoo-button').forEach(element => {
-    element.addEventListener("click", editZoo)
-  })
+  // document.querySelectorAll('.edit-zoo-button').forEach(element => {
+  //   element.addEventListener("click", editZoo)
+  // })
 
   document.querySelectorAll('.delete-zoo').forEach(element => {
     element.addEventListener("click", deleteZoo)
@@ -88,7 +88,7 @@ function getZoos() {
           <div id=sighting-zoo-${zoo.id}></div>
           <div id=edit-zoo-form-${zoo.id}></div>
           <button class="get-sightings btn btn-info mr-4">Sightings</button>
-          <button class="edit-zoo-button btn btn-warning mr-4">Edit Zoo</button>
+          <!--<button class="edit-zoo-button btn btn-warning mr-4">Edit Zoo</button>-->
           <button class="delete-zoo btn btn-danger mr-4">Delete Zoo</button>
         </div><br/>
       `;
@@ -121,43 +121,43 @@ function createZoo(e) {
   })
 }
 
-function editZoo() {
-  let zooId = this.parentElement.getAttribute('data-zoo-id')
+// function editZoo() {
+//   let zooId = this.parentElement.getAttribute('data-zoo-id')
 
-  fetch(`http://localhost:3000/zoos/${zooId}`)
-  .then(resp => resp.json())
-  .then(data => {
-    Zoo.editZooForm(data.id)
-    let zooForm = document.getElementById(`edit-zoo-form-${data.id}`)
-    zooForm.querySelector('#name').value = data.name
-    zooForm.querySelector('#zoo-id').value = data.id
-    zooForm.querySelector('#city').value = data.city
-    zooForm.querySelector('#state').value = data.state
-    editFormListener()
-  })
-}
+//   fetch(`http://localhost:3000/zoos/${zooId}`)
+//   .then(resp => resp.json())
+//   .then(data => {
+//     Zoo.editZooForm(data.id)
+//     let zooForm = document.getElementById(`edit-zoo-form-${data.id}`)
+//     zooForm.querySelector('#name').value = data.name
+//     zooForm.querySelector('#zoo-id').value = data.id
+//     zooForm.querySelector('#city').value = data.city
+//     zooForm.querySelector('#state').value = data.state
+//     editFormListener()
+//   })
+// }
 
-function updateZoo(e) {
-  e.preventDefault();
-  let zooId = this.parentElement.parentElement.getAttribute('data-zoo-id')
+// function updateZoo(e) {
+//   e.preventDefault();
+//   let zooId = this.parentElement.parentElement.getAttribute('data-zoo-id')
 
-  const zoo = {
-    name: document.getElementById('name').value,
-    city: document.getElementById('city').value,
-    state: document.getElementById('state').value
-  }
+//   const zoo = {
+//     name: document.getElementById('name').value,
+//     city: document.getElementById('city').value,
+//     state: document.getElementById('state').value
+//   }
 
-  fetch(`http://localhost:3000/zoos/${zooId}`, {
-    method: 'PATCH',
-    body: JSON.stringify(zoo),
-    headers: {'Content-Type': 'application/json', 'Accept': 'application/json'}
-  })
-  .then(resp => resp.json())
-  .then(zoo => {
-    editFormListener()
-    getZoos()
-  })
-}
+//   fetch(`http://localhost:3000/zoos/${zooId}`, {
+//     method: 'PATCH',
+//     body: JSON.stringify(zoo),
+//     headers: {'Content-Type': 'application/json', 'Accept': 'application/json'}
+//   })
+//   .then(resp => resp.json())
+//   .then(zoo => {
+//     editFormListener()
+//     getZoos()
+//   })
+// }
 
 function deleteZoo() {
   let zooId = this.parentElement.getAttribute('data-zoo-id')
