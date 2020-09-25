@@ -11,13 +11,7 @@ class ZoosController < ApplicationController
   end
 
   def create
-    zoo = Zoo.create(zoo_params)
-    render json: zoo
-  end
-
-  def update
-    zoo = Zoo.find_by(id: params[:id])
-    zoo.update(zoo_params)
+    zoo = Zoo.new(zoo_params)
     if zoo.save
       render json: zoo
     else
