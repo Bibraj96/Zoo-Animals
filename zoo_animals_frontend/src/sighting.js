@@ -71,11 +71,11 @@ function loadSightings() {
         output += `
         <div class="card card-body mb-3" data-sighting-id="${sighting.id}">
         <div id="new-sighting-form"></div>
-        <p>Animal: ${sighting.animal}</p>
-        <p>Exhibit: ${sighting.exhibit} / Schedule: ${sighting.schedule}</p>
-        <p>Date: ${sighting.date} </p>
-        <p>Description: ${sighting.description}</p>
-        <p>Accessibility: ${sighting.accessibility}</p>
+        <p><strong>Animal</strong>: ${sighting.animal}</p>
+        <p><strong>Exhibit</strong>: ${sighting.exhibit} - <strong>Schedule</strong>: ${sighting.schedule}</p>
+        <p><strong>Date</strong>: ${sighting.date} </p>
+        <p><strong>Description</strong>: ${sighting.description}</p>
+        <p><strong>Accessibility</strong>: ${sighting.accessibility}</p>
         <button class="delete-sighting-button btn btn-danger mb-4 mr-4">Delete Sighting</button>
         <button class="close-sighting-button btn btn-outline-warning mb-4 mr-4">Close Sightings</button>
         </div>
@@ -110,7 +110,7 @@ function createSighting(e) {
   .then(json => {
     let newSighting = new Sighting(json)
     console.log(newSighting)
-    getZoos()
+    Zoo.getZoos()
   })
 }
 
