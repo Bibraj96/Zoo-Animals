@@ -24,31 +24,6 @@ class Zoo {
     `
   }
 
-  static getZoos() {
-    fetch("http://localhost:3000/zoos")
-    .then((res) => res.json())
-    .then((data) => {
-      let zoos = document.getElementById('zoos');
-      let output = '<h2 class="display-4 mb-4">Zoos</h2>'
-      data.forEach(function(zoo){
-        output += `
-          <div class="container" data-zoo-id="${zoo.id}">
-            <ul class="list-group mb-3">
-              <li class="list-group-item">${zoo.name}</li>
-              <li class="list-group-item">${zoo.city}, ${zoo.state}</li>
-            </ul>
-            <div id=sighting-zoo-${zoo.id}></div>
-            <div id=edit-zoo-form-${zoo.id}></div>
-            <button class="get-sightings btn btn-info mr-4">Sightings</button>
-            <button class="delete-zoo btn btn-danger mr-4">Delete Zoo</button>
-          </div><br/>
-        `;
-      });
-      zoos.innerHTML = output;
-      attachListeners()
-    })
-  }
-
   static createZoo(e) {
     e.preventDefault();
   
@@ -68,7 +43,7 @@ class Zoo {
        let newZoo = new Zoo(json)
        clearZooFormHtml()
        Zoo.newZooForm()
-       Zoo.getZoos()
+       getZoos()
     })
   }
 
@@ -77,7 +52,7 @@ class Zoo {
 document.addEventListener("DOMContentLoaded", init())
 
 function init() {
-  Zoo.getZoos()
+  getZoos()
   Zoo.newZooForm()
 }
 
@@ -91,8 +66,57 @@ function attachListeners() {
     element.addEventListener("click", deleteZoo)
   })
 
-  document.getElementById('add-zoo').addEventListener("submit", Zoo.createZoo)
+  document.getElementById('add-zoo').addEventListener("submit", createZoo)
   
+}
+
+function getZoos() {
+  fetch("http://localhost:3000/zoos")
+  .then((res) => res.json())
+  .then((allZoos) => {
+    let zoos = document.getElementById('zoos');
+    let output = '<h2 class="display-4 mb-4">Zoos</h2>'
+    allZoos.forEach(function(zoo){
+      let newZoo = new Zoo(zoo)
+      output += `
+        <div class="container" data-zoo-id="${newZoo.id}">
+          <ul class="list-group mb-3">
+            <li class="list-group-item">${newZoo.name}</li>
+            <li class="list-group-item">${newZoo.city}, ${newZoo.state}</li>
+          </ul>
+          <div id=sighting-zoo-${newZoo.id}></div>
+          <div id=edit-zoo-form-${newZoo.id}></div>
+          <button class="get-sightings btn btn-info mr-4">Sightings</button>
+          <button class="delete-zoo btn btn-danger mr-4">Delete Zoo</button>
+        </div><br/>
+      `;
+    });
+    zoos.innerHTML = output;
+    attachListeners()
+  })
+}
+
+function createZoo(e) {
+  e.preventDefault();
+
+   const zoo = {
+     name: document.getElementById('name').value,
+     city: document.getElementById('city').value,
+     state: document.getElementById('state').value
+  }
+
+  fetch("http://localhost:3000/zoos", {
+    method: 'POST',
+    body: JSON.stringify(zoo),
+    headers: {'Content-Type': 'application/json', 'Accept': 'application/json'}
+   })
+   .then(resp => resp.json())
+   .then(json => {
+     let newZoo = new Zoo(json)
+     clearZooFormHtml()
+     Zoo.newZooForm()
+     getZoos()
+  })
 }
 
 function deleteZoo() {
@@ -117,5 +141,5 @@ function clearZooFormHtml() {
 function clearZoosHtml() {
   let zooDiv = document.getElementById("zoos")
   zooDiv.innerHTML = ''
-  Zoo.getZoos()
+  getZoos()
 }
