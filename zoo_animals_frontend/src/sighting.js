@@ -60,22 +60,23 @@ function loadSightings() {
 
   fetch("http://localhost:3000/sightings")
   .then(resp => resp.json())
-  .then(data => {
+  .then(allSightings => {
     let sightingDiv = document.getElementById(`sighting-zoo-${zooId}`)
     let output = `
     <button id="add-sighting-button" class="btn btn-success mb-4 mr-4">Add a Sighting</button>
     <div id="new-sighting-form"></div>
     `
-    data.forEach(function(sighting) {
+    allSightings.forEach(function(sighting) {
       if(sighting.zoo.id == zooId) {
+        let newSighting = new Sighting(sighting)
         output += `
-        <div class="card card-body mb-3" data-sighting-id="${sighting.id}">
+        <div class="card card-body mb-3" data-sighting-id="${newSighting.id}">
         <div id="new-sighting-form"></div>
-        <p><strong>Animal</strong>: ${sighting.animal}</p>
-        <p><strong>Exhibit</strong>: ${sighting.exhibit} - <strong>Schedule</strong>: ${sighting.schedule}</p>
-        <p><strong>Date</strong>: ${sighting.date} </p>
-        <p><strong>Description</strong>: ${sighting.description}</p>
-        <p><strong>Accessibility</strong>: ${sighting.accessibility}</p>
+        <p><strong>Animal</strong>: ${newSighting.animal}</p>
+        <p><strong>Exhibit</strong>: ${newSighting.exhibit} - <strong>Schedule</strong>: ${newSighting.schedule}</p>
+        <p><strong>Date</strong>: ${newSighting.date} </p>
+        <p><strong>Description</strong>: ${newSighting.description}</p>
+        <p><strong>Accessibility</strong>: ${newSighting.accessibility}</p>
         <button class="delete-sighting-button btn btn-danger mb-4 mr-4">Delete Sighting</button>
         <button class="close-sighting-button btn btn-outline-warning mb-4 mr-4">Close Sightings</button>
         </div>
@@ -110,7 +111,7 @@ function createSighting(e) {
   .then(json => {
     let newSighting = new Sighting(json)
     console.log(newSighting)
-    Zoo.getZoos()
+    getZoos()
   })
 }
 
