@@ -1,17 +1,17 @@
 class Sighting {
   constructor(data) {
-    this.id = data.id
-    this.animal = data.animal
-    this.exhibit = data.exhibit
-    this.schedule = data.schedule
-    this.date = data.date
-    this.description = data.description
-    this.accessibility = data.accessibility
-    this.zoo_id = data.zoo_id
+    this.id = data.id;
+    this.animal = data.animal;
+    this.exhibit = data.exhibit;
+    this.schedule = data.schedule;
+    this.date = data.date;
+    this.description = data.description;
+    this.accessibility = data.accessibility;
+    this.zoo_id = data.zoo_id;
   }
 
   static newSightingForm() {
-    let newSightingFormDiv = document.getElementById('new-sighting-form')
+    const newSightingFormDiv = document.getElementById('new-sighting-form');
     newSightingFormDiv.innerHTML += `
     <form id="add-sighting">
     <label>Animal: </label><br/>
@@ -31,28 +31,29 @@ class Sighting {
     <input class="btn btn-info mb-4 mr-4" type="submit" value="Add New Sighting">
   </form>
   `
-  document.getElementById('add-sighting').addEventListener("submit", createSighting)
+  document.getElementById('add-sighting').addEventListener("submit", createSighting);
   }
   
 }
 
 function attachSightingListeners() {
-  document.getElementById('add-sighting-button').addEventListener("click", Sighting.newSightingForm)
+  document.getElementById('add-sighting-button').addEventListener("click", Sighting.newSightingForm);
 
   document.querySelectorAll('.add-sighting-button').forEach(element => {
     element.addEventListener("click", Sighting.newSightingForm)
-  })
+  });
 
   document.querySelectorAll('.delete-sighting-button').forEach(element => {
     element.addEventListener("click", deleteSighting)
-  })
+  });
 
   document.querySelectorAll('.delete-sighting-button').forEach(element => {
     element.addEventListener("click", deleteSighting)
-  })
+  });
+
   document.querySelectorAll('.close-sighting-button').forEach(element => {
     element.addEventListener("click", clearZoosHtml)
-  })
+  });
 }
 
 function loadSightings() {
@@ -68,7 +69,7 @@ function loadSightings() {
     `
     allSightings.forEach(function(sighting) {
       if(sighting.zoo.id == zooId) {
-        let newSighting = new Sighting(sighting)
+        const newSighting = new Sighting(sighting);
         output += `
         <div class="card card-body mb-3" data-sighting-id="${newSighting.id}">
         <div id="new-sighting-form"></div>
@@ -84,13 +85,13 @@ function loadSightings() {
       }
     })
     sightingDiv.innerHTML = output
-    attachSightingListeners()
+    attachSightingListeners();
   })
 }
 
 function createSighting(e) {
   e.preventDefault();
-  let zooId = this.parentElement.parentElement.parentElement.getAttribute('data-zoo-id')
+  const zooId = this.parentElement.parentElement.parentElement.getAttribute('data-zoo-id')
 
     const sighting = {
     animal: document.getElementById('animal').value,
@@ -109,15 +110,15 @@ function createSighting(e) {
   })
   .then(resp => resp.json())
   .then(json => {
-    let newSighting = new Sighting(json)
+    const newSighting = new Sighting(json);
     console.log(newSighting)
-    getZoos()
+    getZoos();
   })
 }
 
 function deleteSighting() {
   console.log(this.parentElement.getAttribute('data-sighting-id'))
-  let sightingId = this.parentElement.getAttribute('data-sighting-id')
+  let sightingId = this.parentElement.getAttribute('data-sighting-id');
 
   fetch(`http://localhost:3000/sightings/${sightingId}`, {
     method: 'DELETE',
@@ -125,7 +126,7 @@ function deleteSighting() {
   })
   .then(resp => resp.json())
   .then(json => {
-    let selectedSighting = document.querySelector(`.card[data-sighting-id="${sightingId}"]`)
-    selectedSighting.remove()
+    const selectedSighting = document.querySelector(`.card[data-sighting-id="${sightingId}"]`);
+    selectedSighting.remove();
   })
 }

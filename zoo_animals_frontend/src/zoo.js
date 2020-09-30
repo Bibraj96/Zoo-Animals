@@ -1,14 +1,14 @@
 class Zoo {
   constructor(data) {
-    this.id = data.id
-    this.name = data.name
-    this.city = data.city
-    this.state = data.state
-    this.sightings = data.sightings
+    this.id = data.id;
+    this.name = data.name;
+    this.city = data.city;
+    this.state = data.state;
+    this.sightings = data.sightings;
   }
 
   static newZooForm() {
-    let newZooFormDiv = document.getElementById('new-zoo')
+    let newZooFormDiv = document.getElementById('new-zoo');
     newZooFormDiv.innerHTML += `
       <form id="add-zoo">
         <label>Name: </label><br/>
@@ -24,49 +24,26 @@ class Zoo {
     `
   }
 
-  static createZoo(e) {
-    e.preventDefault();
-  
-     const zoo = {
-       name: document.getElementById('name').value,
-       city: document.getElementById('city').value,
-       state: document.getElementById('state').value
-    }
-  
-    fetch("http://localhost:3000/zoos", {
-      method: 'POST',
-      body: JSON.stringify(zoo),
-      headers: {'Content-Type': 'application/json', 'Accept': 'application/json'}
-     })
-     .then(resp => resp.json())
-     .then(json => {
-       let newZoo = new Zoo(json)
-       clearZooFormHtml()
-       Zoo.newZooForm()
-       getZoos()
-    })
-  }
-
 }
 
-document.addEventListener("DOMContentLoaded", init())
+document.addEventListener("DOMContentLoaded", init());
 
 function init() {
-  getZoos()
-  Zoo.newZooForm()
+  getZoos();
+  Zoo.newZooForm();
 }
 
 function attachListeners() {
 
   document.querySelectorAll('.get-sightings').forEach(element => {
     element.addEventListener("click", loadSightings)
-  }) 
+  }); 
 
   document.querySelectorAll('.delete-zoo').forEach(element => {
     element.addEventListener("click", deleteZoo)
-  })
+  });
 
-  document.getElementById('add-zoo').addEventListener("submit", createZoo)
+  document.getElementById('add-zoo').addEventListener("submit", createZoo);
   
 }
 
@@ -74,10 +51,10 @@ function getZoos() {
   fetch("http://localhost:3000/zoos")
   .then((res) => res.json())
   .then((allZoos) => {
-    let zoos = document.getElementById('zoos');
+    const zoos = document.getElementById('zoos');
     let output = '<h2 class="display-4 mb-4">Zoos</h2>'
     allZoos.forEach(function(zoo){
-      let newZoo = new Zoo(zoo)
+      const newZoo = new Zoo(zoo);
       output += `
         <div class="container" data-zoo-id="${newZoo.id}">
           <ul class="list-group mb-3">
@@ -92,7 +69,7 @@ function getZoos() {
       `;
     });
     zoos.innerHTML = output;
-    attachListeners()
+    attachListeners();
   })
 }
 
@@ -112,15 +89,15 @@ function createZoo(e) {
    })
    .then(resp => resp.json())
    .then(json => {
-     let newZoo = new Zoo(json)
-     clearZooFormHtml()
-     Zoo.newZooForm()
-     getZoos()
+     const newZoo = new Zoo(json)
+     clearZooFormHtml();
+     Zoo.newZooForm();
+     getZoos();
   })
 }
 
 function deleteZoo() {
-  let zooId = this.parentElement.getAttribute('data-zoo-id')
+  const zooId = this.parentElement.getAttribute('data-zoo-id');
 
   fetch(`http://localhost:3000/zoos/${zooId}`, {
     method: 'DELETE',
@@ -128,18 +105,18 @@ function deleteZoo() {
   })
   .then(resp => resp.json())
   .then(json => {
-    let selectedZoo = document.querySelector(`.container[data-zoo-id="${zooId}"]`)
-    selectedZoo.remove()
+    const selectedZoo = document.querySelector(`.container[data-zoo-id="${zooId}"]`);
+    selectedZoo.remove();
   })
 }
 
 function clearZooFormHtml() {
-  let zooForm = document.getElementById("new-zoo")
+  const zooForm = document.getElementById("new-zoo");
   zooForm.innerHTML = ''
 }
 
 function clearZoosHtml() {
-  let zooDiv = document.getElementById("zoos")
+  const zooDiv = document.getElementById("zoos")
   zooDiv.innerHTML = ''
-  getZoos()
+  getZoos();
 }
